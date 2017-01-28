@@ -1,0 +1,47 @@
+# =============== #
+# Unity generated #
+# =============== #
+Bip/Temp/
+Bip/Library/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+Bip/ExportedObj/
+Bip/obj/
+Bip/*.svd
+Bip/*.userprefs
+Bip/*.csproj
+Bip/*.pidb
+Bip/*.suo
+Bip/*.sln
+Bip/*.user
+Bip/*.unityproj
+Bip/*.booproj
+Bip/Assembly-CSharp.csproj
+
+# ============ #
+# OS generated #
+# ============ #
+Bip/.DS_Store
+Bip/.DS_Store?
+Bip/._*
+Bip/.Spotlight-V100
+Bip/.Trashes
+Bip/ehthumbs.db
+Bip/Thumbs.db
+Bip/Assembly-CSharp.csproj
+Bip/Temp/
+Bip/Build/Alpha 0.1/
+Bip/Library/
+Bip/Temp/
+Bip/Assets/Plugins/kolmich/
+Bip/Assets/Plugins.meta
+Bip/Assets/Plugins/kolmich.meta
+Bip/Assembly-CSharp-Editor-firstpass.csproj
+Bip/Assembly-CSharp-Editor.csproj
+Bip/Assembly-CSharp-firstpass.csproj
+Bip/Builds/
+Bip/Assets/EasyEditor.meta
+Bip/Assets/EasyEditor/Readme.pdf
+Bip/Assets/EasyEditor/Readme.pdf.meta
