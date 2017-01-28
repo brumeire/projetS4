@@ -55,7 +55,7 @@ public class Guru : MonoBehaviour {
         Vector3 pos = transform.position;
         float res = Ressources;
 
-        Collider[] hitColliders = Physics.OverlapSphere(pos,res);
+        Collider[] hitColliders = Physics.OverlapSphere(pos,res*0.2f);
 
         foreach (Collider col in hitColliders)
         {

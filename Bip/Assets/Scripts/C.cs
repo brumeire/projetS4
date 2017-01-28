@@ -15,19 +15,25 @@ public class C : MonoBehaviour {
     }
 
     // Update is called once per frame
-    public void BipC(Guru.signaux signal)
+    void Update()
     {
 
+        transform.GetChild(0).GetComponent<TextMesh>().text = "C \n" + Ressources.ToString();
+
+    }
+public void BipC(Guru.signaux signal)
+    {
+        
         RessourcesGURU = GameObject.Find("GURU").GetComponent<Guru>().Ressources;
 
-        if (signal == Guru.signaux.signalC)
+        if (signal == Guru.signaux.signalC && Ressources >= 1)
         {
-            Ressources -= 10;
+            Ressources -= 1;
             GameObject.Find("GURU").GetComponent<Guru>().Ressources += 1;
         }
         if (signal == Guru.signaux.signalA)
         {
-            Ressources += 10;
+            Ressources += 1;
             GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 1;
         }
 
