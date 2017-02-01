@@ -59,18 +59,7 @@ public class Guru : MonoBehaviour {
 
         foreach (Collider col in hitColliders)
         {
-            if (col.tag == "Aa")
-            {
-                col.gameObject.GetComponent<A>().BipA(signal);
-            }
-            if (col.tag == "Bb")
-            {
-                col.gameObject.GetComponent<B>().BipB(signal);
-            }
-            if (col.tag == "Cc")
-            {
-                col.gameObject.GetComponent<C>().BipC(signal);
-            }
+            col.GetComponent<EntityScript>().ReceiveSignal(signal);
         }
     }
 
