@@ -26,12 +26,12 @@ public class B : MonoBehaviour {
 
         if (signal == Guru.signaux.signalB && Ressources >= 1)
         {
-            Ressources -= 1;
+            //Ressources -= 1;
             GameObject.Find("GURU").GetComponent<Guru>().Ressources += 1;
         }
         if (signal == Guru.signaux.signalC)
         {
-            Ressources += 1;
+            //Ressources += 1;
             GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 1;
         }
 

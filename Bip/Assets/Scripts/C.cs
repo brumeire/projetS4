@@ -28,12 +28,12 @@ public void BipC(Guru.signaux signal)
 
         if (signal == Guru.signaux.signalC && Ressources >= 1)
         {
-            Ressources -= 1;
+            //Ressources -= 1;
             GameObject.Find("GURU").GetComponent<Guru>().Ressources += 1;
         }
         if (signal == Guru.signaux.signalA)
         {
-            Ressources += 1;
+            //Ressources += 1;
             GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 1;
         }
 
