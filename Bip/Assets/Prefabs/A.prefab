@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 33910098116874666}
   - component: {fileID: 54971635618813666}
   - component: {fileID: 135616194397090642}
-  - component: {fileID: 114653875655417350}
+  - component: {fileID: 75013401169373840}
   m_Layer: 8
   m_Name: A
   m_TagString: Aa
@@ -160,6 +160,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 2
+--- !u!75 &75013401169373840
+ConstantForce:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1601117046372888}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -0.0000001, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!102 &102764001446690994
 TextMesh:
   serializedVersion: 3
@@ -183,22 +194,6 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!114 &114653875655417350
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1601117046372888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c8a1c6e2898b14cada9fd5504488b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2.48
-  range: 3.66
-  action: 0
-  target: {fileID: 0}
-  timerMax: 1
 --- !u!114 &114768368741411278
 MonoBehaviour:
   m_ObjectHideFlags: 1
