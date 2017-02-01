@@ -46,7 +46,7 @@ public class EntityScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        timer += Time.deltaTime;
+        //timer += Time.deltaTime;
 
         if (timer >= timerChange)
         {
@@ -81,14 +81,40 @@ public class EntityScript : MonoBehaviour {
 
             Type newType = type;
 
-            if (redArround > blueArround && redArround > greenArround)
+            if (redArround > blueArround && redArround > greenArround && type != Type.A)
                 newType = Type.A;
 
-            else if (blueArround > redArround && blueArround > greenArround)
+            else if (blueArround > redArround && blueArround > greenArround && type != Type.B)
                 newType = Type.B;
 
-            else if (greenArround > redArround && greenArround > blueArround)
+            else if (greenArround > redArround && greenArround > blueArround && type != Type.C)
                 newType = Type.C;
+
+            else if (type == Type.A)
+            {
+                if (Random.value < 0.5f)
+                    newType = Type.B;
+                else
+                    newType = Type.C;
+            }
+
+            else if (type == Type.B)
+            {
+                if (Random.value < 0.5f)
+                    newType = Type.A;
+                else
+                    newType = Type.C;
+            }
+
+            else if (type == Type.C)
+            {
+                if (Random.value < 0.5f)
+                    newType = Type.A;
+                else
+                    newType = Type.B;
+            }
+
+
 
 
             ChangeType(newType);
