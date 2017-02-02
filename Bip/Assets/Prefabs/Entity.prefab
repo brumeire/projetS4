@@ -20,9 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4726084203248992}
   - component: {fileID: 33601795141717674}
-  - component: {fileID: 65614813212189870}
   - component: {fileID: 23872301321074722}
   - component: {fileID: 114356903394039640}
+  - component: {fileID: 114219597054818036}
+  - component: {fileID: 54563083236352968}
+  - component: {fileID: 75912544982833364}
+  - component: {fileID: 135178907959309038}
   m_Layer: 0
   m_Name: Entity
   m_TagString: Untagged
@@ -110,19 +113,44 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1478596384115448}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65614813212189870
-BoxCollider:
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54563083236352968
+Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1478596384115448}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!75 &75912544982833364
+ConstantForce:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1478596384115448}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 100, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!114 &114219597054818036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1478596384115448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c8a1c6e2898b14cada9fd5504488b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114356903394039640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,12 +168,19 @@ MonoBehaviour:
   - {fileID: 2100000, guid: fdb89575891afea47866268225e12df8, type: 2}
   - {fileID: 2100000, guid: f51b8d004ab099946b1a6d7a4fdae597, type: 2}
   - {fileID: 2100000, guid: c1f8a9e48a51b18469b31b5376ffcbca, type: 2}
-  arrows:
-  - {fileID: 21300000, guid: 8180c0d62cc08234281546f60062dfc9, type: 3}
-  - {fileID: 21300000, guid: 9889fd9a8a3fd7f4a83c92f74a61531c, type: 3}
-  - {fileID: 21300000, guid: fb111ea0355349547895eb0c61a093ae, type: 3}
-  - {fileID: 21300000, guid: 0641a1a4e636a734b878d61c0a234433, type: 3}
   timerChange: 0.2
+--- !u!135 &135178907959309038
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1478596384115448}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &212957814838504378
 SpriteRenderer:
   m_ObjectHideFlags: 1

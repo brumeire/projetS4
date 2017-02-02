@@ -53,13 +53,6 @@ public class Guru : MonoBehaviour {
             Influence();
         }
 
-        else if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            signal = signaux.signalD;
-            Influence();
-        }
-
-
 
     }
 
@@ -70,10 +63,46 @@ public class Guru : MonoBehaviour {
 
         Collider[] hitColliders = Physics.OverlapSphere(pos,res);
 
+        int numbOfRed = 0;
+        int numbOfBlue = 0;
+        int numbOfGreen = 0;
+
         foreach (Collider col in hitColliders)
         {
-            col.GetComponent<EntityScript>().ReceiveSignal(signal);
+           
+            switch (col.tag)
+            {
+                case "A":
+                    numbOfRed++;
+                    break;
+
+                case "B":
+                    numbOfBlue++;
+                    break;
+
+                case "C":
+                    numbOfGreen++;
+                    break;
+
+            }
+            
+                
         }
+
+        if (numbOfRed > numbOfBlue && numbOfRed > numbOfGreen && signal == signaux.signalA)
+            Ressources += 0.3f;
+
+        else if (numbOfBlue > numbOfRed && numbOfBlue > numbOfGreen && signal == signaux.signalB)
+            Ressources += 0.3f;
+
+        else if (numbOfGreen > numbOfRed && numbOfGreen > numbOfBlue)
+            Ressources += 0.3f;
+
+        else if (!(numbOfRed == numbOfBlue || numbOfRed == numbOfGreen || numbOfBlue == numbOfGreen))
+            Ressources -= 0.3f;
+
+
+
     }
 
     void OnDrawGizmos()

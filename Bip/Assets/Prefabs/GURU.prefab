@@ -108,5 +108,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signal: 0
-  Ressources: 1.71
-  lostPerTime: 0.228
+  Ressources: 1.58
+  lostPerTime: 0.9
