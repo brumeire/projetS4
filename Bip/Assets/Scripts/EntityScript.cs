@@ -8,12 +8,15 @@ public class EntityScript : MonoBehaviour {
     {
         A,
         B,
-        C
+        C,
+        D
     }
 
     public Type type;
 
     public Material[] entityMaterials;
+
+    public Sprite[] arrows;
 
     public float timerChange = 2.5f;
 
@@ -22,7 +25,7 @@ public class EntityScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        int rand = Random.Range(0, 3);
+        int rand = Random.Range(0, 4);
 
         switch (rand)
         {
@@ -37,6 +40,10 @@ public class EntityScript : MonoBehaviour {
             case 2:
                 type = Type.C;
                 break;
+
+            case 3:
+                type = Type.D;
+                break;
         }
 
         ChangeType(type);
@@ -46,81 +53,29 @@ public class EntityScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //timer += Time.deltaTime;
-
-        if (timer >= timerChange)
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            timer -= timerChange;
-
-            Collider[] surroundings = Physics.OverlapBox(transform.position, new Vector3(0.2f, 0.2f, 0.2f));
-
-            int blueArround = 0;
-            int greenArround = 0;
-            int redArround = 0;
-
-            foreach (Collider col in surroundings)
-            {
-                if (col.gameObject != gameObject)
-                {
-                    switch (col.tag)
-                    {
-                        case "A":
-                            redArround++;
-                            break;
-
-                        case "B":
-                            blueArround++;
-                            break;
-
-                        case "C":
-                            greenArround++;
-                            break;
-                    }
-                }
-            }
-
-            Type newType = type;
-
-            if (redArround > blueArround && redArround > greenArround && type != Type.A)
-                newType = Type.A;
-
-            else if (blueArround > redArround && blueArround > greenArround && type != Type.B)
-                newType = Type.B;
-
-            else if (greenArround > redArround && greenArround > blueArround && type != Type.C)
-                newType = Type.C;
-
-            else if (type == Type.A)
-            {
-                if (Random.value < 0.5f)
-                    newType = Type.B;
-                else
-                    newType = Type.C;
-            }
-
-            else if (type == Type.B)
-            {
-                if (Random.value < 0.5f)
-                    newType = Type.A;
-                else
-                    newType = Type.C;
-            }
-
-            else if (type == Type.C)
-            {
-                if (Random.value < 0.5f)
-                    newType = Type.A;
-                else
-                    newType = Type.B;
-            }
-
-
-
-
-            ChangeType(newType);
-
+            transform.position += Vector3.up;
         }
-	}
+
+        else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            transform.position += Vector3.down;
+        }
+
+
+        else if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            transform.position += Vector3.right;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            transform.position += Vector3.left;
+        }
+
+
+    }
 
 
     public void ChangeType (Type newType)
@@ -132,16 +87,25 @@ public class EntityScript : MonoBehaviour {
             case Type.A:
                 GetComponent<Renderer>().material = entityMaterials[0];
                 tag = "A";
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = arrows[0];
                 break;
 
             case Type.B:
                 GetComponent<Renderer>().material = entityMaterials[1];
                 tag = "B";
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = arrows[1];
                 break;
 
             case Type.C:
                 GetComponent<Renderer>().material = entityMaterials[2];
                 tag = "C";
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = arrows[2];
+                break;
+
+            case Type.D:
+                GetComponent<Renderer>().material = entityMaterials[3];
+                tag = "D";
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = arrows[3];
                 break;
         }
         
@@ -157,12 +121,12 @@ public class EntityScript : MonoBehaviour {
 
                 if (signal == Guru.signaux.signalA)
                 {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources += 1;
+                    GameObject.Find("GURU").GetComponent<Guru>().Ressources += 0.3f;
                 }
 
-                if (signal == Guru.signaux.signalB)
+                else if (signal == Guru.signaux.signalB)
                 {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 1;
+                    GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 0.3f;
                 }
 
                 break;
@@ -173,12 +137,12 @@ public class EntityScript : MonoBehaviour {
 
                 if (signal == Guru.signaux.signalB)
                 {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources += 1;
+                    GameObject.Find("GURU").GetComponent<Guru>().Ressources += 0.3f;
                 }
 
-                if (signal == Guru.signaux.signalC)
+                else if (signal == Guru.signaux.signalA)
                 {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 1;
+                    GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 0.3f;
                 }
 
                 break;
@@ -189,11 +153,28 @@ public class EntityScript : MonoBehaviour {
 
                 if (signal == Guru.signaux.signalC)
                 {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources += 1;
+                    GameObject.Find("GURU").GetComponent<Guru>().Ressources += 0.3f;
                 }
-                if (signal == Guru.signaux.signalA)
+
+                else if (signal == Guru.signaux.signalD)
                 {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 1;
+                    GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 0.3f;
+                }
+
+                break;
+
+
+
+            case "D":
+
+                if (signal == Guru.signaux.signalD)
+                {
+                    GameObject.Find("GURU").GetComponent<Guru>().Ressources += 0.3f;
+                }
+
+                else if (signal == Guru.signaux.signalC)
+                {
+                    GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 0.3f;
                 }
 
                 break;

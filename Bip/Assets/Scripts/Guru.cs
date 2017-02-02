@@ -6,7 +6,8 @@ public class Guru : MonoBehaviour {
     public enum signaux {
         signalA,
         signalB,
-        signalC
+        signalC,
+        signalD
     }
     public signaux signal;
 
@@ -27,22 +28,34 @@ public class Guru : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         Ressources -= Time.deltaTime * lostPerTime;
-        if (Input.GetKeyDown(KeyCode.A))
+
+        transform.localScale = new Vector3(Ressources * 2, Ressources * 2, 0.1f);
+
+        if (Ressources <= 0)
+            Destroy(gameObject);
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             signal = signaux.signalA;
             Influence();
         }
        
-        else if (Input.GetKeyDown(KeyCode.Z))
+        else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             signal = signaux.signalB;
             Influence();
         }
         
 
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             signal = signaux.signalC;
+            Influence();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            signal = signaux.signalD;
             Influence();
         }
 
@@ -55,7 +68,7 @@ public class Guru : MonoBehaviour {
         Vector3 pos = transform.position;
         float res = Ressources;
 
-        Collider[] hitColliders = Physics.OverlapSphere(pos,res*0.2f);
+        Collider[] hitColliders = Physics.OverlapSphere(pos,res);
 
         foreach (Collider col in hitColliders)
         {
@@ -66,7 +79,7 @@ public class Guru : MonoBehaviour {
     void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, Ressources*0.2f);
+        Gizmos.DrawWireSphere(transform.position, Ressources);
     }
 
 }
