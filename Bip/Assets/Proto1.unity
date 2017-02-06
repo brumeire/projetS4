@@ -333,11 +333,6 @@ Prefab:
       propertyPath: m_Name
       value: Entity (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 75912544982833364, guid: 6f3eebafea31c9e4f989130728d1b031,
-        type: 2}
-      propertyPath: m_RelativeForce.y
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f3eebafea31c9e4f989130728d1b031, type: 2}
   m_IsPrefabParent: 0
@@ -1043,7 +1038,8 @@ Prefab:
       propertyPath: lostPerTime
       value: 0.28
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 54791054526078528, guid: a01b969000248e74baa95ad57b6dc09f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a01b969000248e74baa95ad57b6dc09f, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1264453399
