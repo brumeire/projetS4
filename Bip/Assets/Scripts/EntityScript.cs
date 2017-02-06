@@ -22,7 +22,7 @@ public class EntityScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        int rand = Random.Range(0, 3);
+        /*int rand = Random.Range(0, 3);
 
         switch (rand)
         {
@@ -38,7 +38,7 @@ public class EntityScript : MonoBehaviour {
                 type = Type.C;
                 break;
 
-        }
+        }*/
 
         ChangeType(type);
 		

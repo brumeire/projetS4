@@ -18,6 +18,8 @@ public class Guru : MonoBehaviour {
     public bool signalB;
     public bool signalC;*/
 
+    public Material[] materials;
+
     // Use this for initialization
     void Start () {
         /*signalA = false;
@@ -34,13 +36,13 @@ public class Guru : MonoBehaviour {
         if (Ressources <= 0)
             Destroy(gameObject);
 
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             signal = signaux.signalA;
             Influence();
         }
        
-        else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             signal = signaux.signalB;
             Influence();
@@ -52,6 +54,27 @@ public class Guru : MonoBehaviour {
             signal = signaux.signalC;
             Influence();
         }
+
+
+
+        /*if (Input.GetKey(KeyCode.A))
+        {
+            GetComponent<Renderer>().material = materials[1];
+        }
+
+        else if (Input.GetKey(KeyCode.Z))
+        {
+            GetComponent<Renderer>().material = materials[2];
+        }
+
+        else if (Input.GetKey(KeyCode.E))
+        {
+            GetComponent<Renderer>().material = materials[3];
+        }
+        else
+        {
+            GetComponent<Renderer>().material = materials[0];
+        }*/
 
 
     }
@@ -90,16 +113,39 @@ public class Guru : MonoBehaviour {
         }
 
         if (numbOfRed > numbOfBlue && numbOfRed > numbOfGreen && signal == signaux.signalA)
+        {
             Ressources += 0.3f;
+            GameObject[] targets = GameObject.FindGameObjectsWithTag("A");
 
+            foreach(GameObject go in targets)
+            {
+                go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 30, 0);
+            }
+        }
         else if (numbOfBlue > numbOfRed && numbOfBlue > numbOfGreen && signal == signaux.signalB)
+        {
             Ressources += 0.3f;
+            GameObject[] targets = GameObject.FindGameObjectsWithTag("B");
 
-        else if (numbOfGreen > numbOfRed && numbOfGreen > numbOfBlue)
+            foreach (GameObject go in targets)
+            {
+                go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 30, 0);
+            }
+        }
+
+        else if (numbOfGreen > numbOfRed && numbOfGreen > numbOfBlue && signal == signaux.signalC)
+        {
             Ressources += 0.3f;
+            GameObject[] targets = GameObject.FindGameObjectsWithTag("C");
+
+            foreach (GameObject go in targets)
+            {
+                go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 120, 0);
+            }
+        }
 
         else if (!(numbOfRed == numbOfBlue || numbOfRed == numbOfGreen || numbOfBlue == numbOfGreen))
-            Ressources -= 0.3f;
+            Ressources -= 0.6f;
 
 
 
