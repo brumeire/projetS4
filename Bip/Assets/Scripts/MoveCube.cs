@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MoveCube : MonoBehaviour
 {
+    public float speed = 100;
     ConstantForce constantForce;
     // Use this for initialization
     void Start()
@@ -17,11 +18,11 @@ public class MoveCube : MonoBehaviour
     void Update()
     {
 
-        if (constantForce.relativeForce.y > 100)
+        if (constantForce.relativeForce.y > speed)
             constantForce.relativeForce -= new Vector3(0, 0.2f * Time.deltaTime, 0);
 
-        if (constantForce.relativeForce.y < 100)
-            constantForce.relativeForce = new Vector3(0, 100, 0);
+        if (constantForce.relativeForce.y < speed)
+            constantForce.relativeForce = new Vector3(0, speed, 0);
 
         else if (constantForce.relativeForce.y > 500)
             constantForce.relativeForce = new Vector3(0, 500, 0);
