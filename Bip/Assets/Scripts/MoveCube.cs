@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class MoveCube : MonoBehaviour
 {
+
+
+	public float VitMin;
+	public float VitMax;
+	float vitesse;
+
     ConstantForce constantForce;
     // Use this for initialization
     void Start()
     {
+		vitesse = Random.Range (VitMin, VitMax);
+
         constantForce = GetComponent<ConstantForce>();
         //GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0) * 0.1f);
         transform.localEulerAngles = new Vector3(0, 0, Random.Range(0f, 360f));
@@ -17,13 +25,13 @@ public class MoveCube : MonoBehaviour
     void Update()
     {
 
-        if (constantForce.relativeForce.y > 100)
+		if (constantForce.relativeForce.y > vitesse)
             constantForce.relativeForce -= new Vector3(0, 0.2f * Time.deltaTime, 0);
 
-        if (constantForce.relativeForce.y < 100)
-            constantForce.relativeForce = new Vector3(0, 100, 0);
+		if (constantForce.relativeForce.y < vitesse)
+			constantForce.relativeForce = new Vector3(0, vitesse, 0);
 
-        else if (constantForce.relativeForce.y > 500)
+		else if (constantForce.relativeForce.y > 500)
             constantForce.relativeForce = new Vector3(0, 500, 0);
 
 
