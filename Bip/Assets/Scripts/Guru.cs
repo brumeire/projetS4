@@ -119,7 +119,8 @@ public class Guru : MonoBehaviour {
 
             foreach(GameObject go in targets)
             {
-                go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 30, 0);
+                if (Vector3.Distance(go.transform.position, transform.position) <= res)
+                    go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 30, 0);
             }
         }
         else if (numbOfBlue > numbOfRed && numbOfBlue > numbOfGreen && signal == signaux.signalB)
@@ -129,7 +130,8 @@ public class Guru : MonoBehaviour {
 
             foreach (GameObject go in targets)
             {
-                go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 30, 0);
+                if (Vector3.Distance(go.transform.position, transform.position) <= res)
+                    go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 30, 0);
             }
         }
 
@@ -140,7 +142,7 @@ public class Guru : MonoBehaviour {
 
             foreach (GameObject go in targets)
             {
-                if (Vector3.Distance(go.transform.position, transform.position) <= res/2)
+                if (Vector3.Distance(go.transform.position, transform.position) <= res)
                     go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 120, 0);
             }
         }
