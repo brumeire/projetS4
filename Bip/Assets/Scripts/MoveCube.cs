@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class MoveCube : MonoBehaviour
 {
+
+	public float[] paliay;
+	public int indexPaliay = 0;
+	public float reductionPaliay;
+	public float timer;
+
     ConstantForce constantForce;
     // Use this for initialization
     void Start()
@@ -17,14 +23,17 @@ public class MoveCube : MonoBehaviour
     void Update()
     {
 
-        if (constantForce.relativeForce.y > 100)
-            constantForce.relativeForce -= new Vector3(0, 0.2f * Time.deltaTime, 0);
-
-        if (constantForce.relativeForce.y < 100)
-            constantForce.relativeForce = new Vector3(0, 100, 0);
-
-        else if (constantForce.relativeForce.y > 500)
-            constantForce.relativeForce = new Vector3(0, 500, 0);
+		timer += Time.deltaTime;
+		if (timer >= reductionPaliay) {
+			timer = 0;
+			if (indexPaliay > 0) {
+				indexPaliay--;
+			}
+		}
+		if (indexPaliay <= 0) {
+			indexPaliay = 0;
+		}
+		constantForce.relativeForce = new Vector3 (0,paliay[indexPaliay], 0);
 
 
         GetComponent<Rigidbody>().velocity = Vector3.zero;
