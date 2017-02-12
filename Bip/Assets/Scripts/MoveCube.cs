@@ -8,7 +8,9 @@ public class MoveCube : MonoBehaviour
     public float minSpeed = 2;
     public float maxSpeed = 5;
     public float speedReductionPerSecond = 0.2f;
-    private float velocityAmount = 100;
+
+    [HideInInspector]
+    public float velocityAmount = 100;
     // Use this for initialization
     void Start()
     {

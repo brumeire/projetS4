@@ -29,11 +29,11 @@ public class Guru : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        Ressources -= Time.deltaTime * lostPerTime;
+        Ressources += Time.deltaTime * lostPerTime;
 
         transform.localScale = new Vector3(Ressources * 2, Ressources * 2, 0.1f);
 
-        if (Ressources <= 0)
+        if (Ressources >= 5)
             Destroy(gameObject);
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -114,38 +114,38 @@ public class Guru : MonoBehaviour {
 
         if (numbOfRed > numbOfBlue && numbOfRed > numbOfGreen && signal == signaux.signalA)
         {
-            Ressources += 0.3f;
+            Ressources -= 0.3f;
             GameObject[] targets = GameObject.FindGameObjectsWithTag("A");
 
             foreach(GameObject go in targets)
             {
-                go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 30, 0);
+                go.GetComponent<MoveCube>().velocityAmount += 3;
             }
         }
         else if (numbOfBlue > numbOfRed && numbOfBlue > numbOfGreen && signal == signaux.signalB)
         {
-            Ressources += 0.3f;
+            Ressources -= 0.3f;
             GameObject[] targets = GameObject.FindGameObjectsWithTag("B");
 
             foreach (GameObject go in targets)
             {
-                go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 30, 0);
+                go.GetComponent<MoveCube>().velocityAmount += 3;
             }
         }
 
         else if (numbOfGreen > numbOfRed && numbOfGreen > numbOfBlue && signal == signaux.signalC)
         {
-            Ressources += 0.3f;
+            Ressources -= 0.3f;
             GameObject[] targets = GameObject.FindGameObjectsWithTag("C");
 
             foreach (GameObject go in targets)
             {
-                go.GetComponent<ConstantForce>().relativeForce += new Vector3(0, 120, 0);
+                go.GetComponent<MoveCube>().velocityAmount += 3;
             }
         }
 
         else if (!(numbOfRed == numbOfBlue || numbOfRed == numbOfGreen || numbOfBlue == numbOfGreen))
-            Ressources -= 0.6f;
+            Ressources += 0.6f;
 
 
 
