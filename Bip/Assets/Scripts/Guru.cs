@@ -127,32 +127,35 @@ public class Guru : MonoBehaviour {
         if (numbOfRed > numbOfBlue && numbOfRed > numbOfGreen && signal == signaux.signalA)
         {
             modifRessource += 0.3f;
-            GameObject[] targets = GameObject.FindGameObjectsWithTag("A");
+            Collider[] targets = Physics.OverlapSphere(pos, res);
 
-            foreach(GameObject go in targets)
+            foreach (Collider col in targets)
             {
-                go.GetComponent<MoveCube>().velocityAmount += 3;
+                if (col.tag == "A")
+                    col.GetComponent<MoveCube>().velocityAmount += 3;
             }
         }
         else if (numbOfBlue > numbOfRed && numbOfBlue > numbOfGreen && signal == signaux.signalB)
         {
             modifRessource += 0.3f;
-            GameObject[] targets = GameObject.FindGameObjectsWithTag("B");
+            Collider[] targets = Physics.OverlapSphere(pos, res);
 
-            foreach (GameObject go in targets)
+            foreach (Collider col in targets)
             {
-                go.GetComponent<MoveCube>().velocityAmount += 3;
+                if (col.tag == "B")
+                    col.GetComponent<MoveCube>().velocityAmount += 3;
             }
         }
 
         else if (numbOfGreen > numbOfRed && numbOfGreen > numbOfBlue && signal == signaux.signalC)
         {
             modifRessource += 0.3f;
-            GameObject[] targets = GameObject.FindGameObjectsWithTag("C");
+            Collider[] targets = Physics.OverlapSphere(pos, res);
 
-            foreach (GameObject go in targets)
+            foreach (Collider col in targets)
             {
-                go.GetComponent<MoveCube>().velocityAmount += 3;
+                if (col.tag == "C")
+                    col.GetComponent<MoveCube>().velocityAmount += 3;
             }
         }
 
