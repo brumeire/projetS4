@@ -156,7 +156,7 @@ public class Guru : MonoBehaviour {
             }
         }
 
-        else if (!(numbOfRed == numbOfBlue || numbOfRed == numbOfGreen || numbOfBlue == numbOfGreen))
+        else if (!((numbOfRed == numbOfBlue && numbOfRed >= numbOfGreen) || (numbOfRed == numbOfGreen && numbOfRed >= numbOfBlue) || (numbOfBlue == numbOfGreen && numbOfBlue >= numbOfRed)))
             modifRessource -= 0.6f;
 
         /*if (Ressources < 2.5f)
