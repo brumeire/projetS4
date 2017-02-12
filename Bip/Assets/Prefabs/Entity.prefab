@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114219597054818036}
   - component: {fileID: 54563083236352968}
   - component: {fileID: 135178907959309038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Entity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,13 +41,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4274288556351188}
   - component: {fileID: 212957814838504378}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4274288556351188
 Transform:
   m_ObjectHideFlags: 1
@@ -140,8 +140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 2
-  maxSpeed: 62.72
+  maxSpeed: 14.01
   speedReductionPerSecond: 0.05
+  velocityDebug: {x: 0, y: 0, z: 0}
   velocityAmount: 100
 --- !u!114 &114356903394039640
 MonoBehaviour:

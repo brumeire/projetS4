@@ -8,6 +8,7 @@ public class MoveCube : MonoBehaviour
     public float minSpeed = 2;
     public float maxSpeed = 5;
     public float speedReductionPerSecond = 0.2f;
+    public Vector3 velocityDebug;
 
     [HideInInspector]
     public float velocityAmount = 100;
@@ -24,6 +25,7 @@ public class MoveCube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        velocityDebug = GetComponent<Rigidbody>().velocity;
         //velocityAmount = GetComponent<Rigidbody>().velocity.magnitude;
 
         if (velocityAmount > minSpeed)
