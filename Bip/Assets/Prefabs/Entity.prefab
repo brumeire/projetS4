@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8a1c6e2898b14cada9fd5504488b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 2
+  minSpeed: 3.5
   maxSpeed: 14.01
   speedReductionPerSecond: 0.05
   velocityDebug: {x: 0, y: 0, z: 0}
@@ -155,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b8364e8a74c4349a2bdbd0db075b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tailleMin: 0.15
+  tailleMax: 1.7
   type: 0
   entityMaterials:
   - {fileID: 2100000, guid: 83cc2caddad525c478805215b81da1fb, type: 2}

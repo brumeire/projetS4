@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EntityScript : MonoBehaviour {
 
+    public float tailleMin;
+    public float tailleMax;
+
     public enum Type
     {
         A,
@@ -39,6 +42,8 @@ public class EntityScript : MonoBehaviour {
                 break;
 
         }*/
+        float randTaille = Random.Range(tailleMin, tailleMax);
+        transform.localScale = new Vector3(randTaille, randTaille, randTaille);
 
         ChangeType(type);
 		

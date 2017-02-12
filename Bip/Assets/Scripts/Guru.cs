@@ -29,11 +29,21 @@ public class Guru : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
+        /*if (Ressources < 2.5f)
+        {
+            Ressources -= Time.deltaTime * lostPerTime;
+        }
+
+        else if (Ressources >= 2.5f)
+        {*/
         Ressources += Time.deltaTime * lostPerTime;
+       // }
+
 
         transform.localScale = new Vector3(Ressources * 2, Ressources * 2, 0.1f);
 
-        if (Ressources >= 5)
+        if (Ressources >= 5 || Ressources <= 0)
             Destroy(gameObject);
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -112,9 +122,11 @@ public class Guru : MonoBehaviour {
                 
         }
 
+        float modifRessource = 0;
+
         if (numbOfRed > numbOfBlue && numbOfRed > numbOfGreen && signal == signaux.signalA)
         {
-            Ressources -= 0.3f;
+            modifRessource += 0.3f;
             GameObject[] targets = GameObject.FindGameObjectsWithTag("A");
 
             foreach(GameObject go in targets)
@@ -124,7 +136,7 @@ public class Guru : MonoBehaviour {
         }
         else if (numbOfBlue > numbOfRed && numbOfBlue > numbOfGreen && signal == signaux.signalB)
         {
-            Ressources -= 0.3f;
+            modifRessource += 0.3f;
             GameObject[] targets = GameObject.FindGameObjectsWithTag("B");
 
             foreach (GameObject go in targets)
@@ -135,7 +147,7 @@ public class Guru : MonoBehaviour {
 
         else if (numbOfGreen > numbOfRed && numbOfGreen > numbOfBlue && signal == signaux.signalC)
         {
-            Ressources -= 0.3f;
+            modifRessource += 0.3f;
             GameObject[] targets = GameObject.FindGameObjectsWithTag("C");
 
             foreach (GameObject go in targets)
@@ -145,9 +157,12 @@ public class Guru : MonoBehaviour {
         }
 
         else if (!(numbOfRed == numbOfBlue || numbOfRed == numbOfGreen || numbOfBlue == numbOfGreen))
-            Ressources += 0.6f;
+            modifRessource -= 0.6f;
 
-
+        /*if (Ressources < 2.5f)
+            Ressources += modifRessource;
+        else if (Ressources >= 2.5f)*/
+        Ressources -= modifRessource;
 
     }
 
