@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 114356903394039640}
   - component: {fileID: 114219597054818036}
   - component: {fileID: 54563083236352968}
-  - component: {fileID: 75912544982833364}
   - component: {fileID: 135178907959309038}
   m_Layer: 0
   m_Name: Entity
@@ -127,19 +126,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!75 &75912544982833364
-ConstantForce:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1478596384115448}
-  m_Enabled: 1
-  m_Force: {x: 0, y: 0, z: 0}
-  m_RelativeForce: {x: 0, y: 100, z: 0}
-  m_Torque: {x: 0, y: 0, z: 0}
-  m_RelativeTorque: {x: 0, y: 0, z: 0}
+  m_Constraints: 120
+  m_CollisionDetection: 2
 --- !u!114 &114219597054818036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,6 +139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8a1c6e2898b14cada9fd5504488b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minSpeed: 2
+  maxSpeed: 8
+  speedReductionPerSecond: 0.2
 --- !u!114 &114356903394039640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,7 +166,7 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1478596384115448}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1784b245d620fca4496bb5979d0bfca1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

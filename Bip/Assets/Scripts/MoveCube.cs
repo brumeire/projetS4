@@ -4,46 +4,56 @@ using UnityEngine;
 
 public class MoveCube : MonoBehaviour
 {
-    ConstantForce constantForce;
+    //private ConstantForce constantForce;
+    public float minSpeed = 2;
+    public float maxSpeed = 5;
+    public float speedReductionPerSecond = 0.2f;
+    private float velocityAmount = 100;
     // Use this for initialization
     void Start()
     {
-        constantForce = GetComponent<ConstantForce>();
+        //constantForce = GetComponent<ConstantForce>();
         //GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0) * 0.1f);
-        transform.localEulerAngles = new Vector3(0, 0, Random.Range(0f, 360f));
+        GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0).normalized * minSpeed;
+        //transform.localEulerAngles = new Vector3(0, 0, Random.Range(0f, 360f));
+        velocityAmount = minSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //velocityAmount = GetComponent<Rigidbody>().velocity.magnitude;
 
-        if (constantForce.relativeForce.y > 100)
-            constantForce.relativeForce -= new Vector3(0, 0.2f * Time.deltaTime, 0);
+        if (velocityAmount > minSpeed)
+            velocityAmount -= speedReductionPerSecond;
 
-        if (constantForce.relativeForce.y < 100)
-            constantForce.relativeForce = new Vector3(0, 100, 0);
+        if (velocityAmount < minSpeed)
+            velocityAmount = minSpeed;
 
-        else if (constantForce.relativeForce.y > 500)
-            constantForce.relativeForce = new Vector3(0, 500, 0);
+        else if (velocityAmount > maxSpeed)
+            velocityAmount = maxSpeed;
 
 
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * velocityAmount;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Wall")
+        if (collision.gameObject.tag == "Wall")
         {
-            Vector3 dirOpposee = collision.contacts[0].normal;
+            /*Vector3 dirOpposee = collision.contacts[0].normal;
             Vector3 dirInc = transform.up;
 
             transform.up = -dirInc;
-            transform.eulerAngles += new Vector3(0, 0, Vector3.Angle(-dirInc, dirOpposee) * 2);
-        }
-        else
+            transform.eulerAngles += new Vector3(0, 0, Vector3.Angle(-dirInc, dirOpposee) * 2);*/
+
+           // GetComponent<Rigidbody>().velocity = transform.position.normalized * velocityAmount;
+
+       // }
+       /* else
         {
             transform.up = -transform.position;
-        }
-    }
+        }*/
+    //}
 
 }
