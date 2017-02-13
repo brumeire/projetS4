@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b8364e8a74c4349a2bdbd0db075b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tailleMin: 0.25
-  tailleMax: 1.5
+  tailleMin: 1
+  tailleMax: 1
   type: 0
   entityMaterials:
   - {fileID: 2100000, guid: 83cc2caddad525c478805215b81da1fb, type: 2}

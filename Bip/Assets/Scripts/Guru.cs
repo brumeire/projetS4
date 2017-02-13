@@ -13,7 +13,7 @@ public class Guru : MonoBehaviour {
 
     public float Ressources;
     public float lostPerTime;
-
+    public float lostOnFail = 0.3f;
     /*public bool signalA;
     public bool signalB;
     public bool signalC;*/
@@ -132,7 +132,10 @@ public class Guru : MonoBehaviour {
             foreach (Collider col in targets)
             {
                 if (col.tag == "A")
+                {
                     col.GetComponent<MoveCube>().velocityAmount += 3;
+                    col.GetComponent<Rigidbody>().velocity = col.transform.position;
+                }
             }
         }
         else if (numbOfBlue > numbOfRed && numbOfBlue > numbOfGreen && signal == signaux.signalB)
@@ -143,7 +146,10 @@ public class Guru : MonoBehaviour {
             foreach (Collider col in targets)
             {
                 if (col.tag == "B")
+                {
                     col.GetComponent<MoveCube>().velocityAmount += 3;
+                    col.GetComponent<Rigidbody>().velocity = col.transform.position;
+                }
             }
         }
 
@@ -155,12 +161,15 @@ public class Guru : MonoBehaviour {
             foreach (Collider col in targets)
             {
                 if (col.tag == "C")
+                {
                     col.GetComponent<MoveCube>().velocityAmount += 3;
+                    col.GetComponent<Rigidbody>().velocity = col.transform.position;
+                }
             }
         }
 
         else if (!((numbOfRed == numbOfBlue && numbOfRed >= numbOfGreen) || (numbOfRed == numbOfGreen && numbOfRed >= numbOfBlue) || (numbOfBlue == numbOfGreen && numbOfBlue >= numbOfRed)))
-            modifRessource -= 0.6f;
+            modifRessource -= lostOnFail;
 
         /*if (Ressources < 2.5f)
             Ressources += modifRessource;
