@@ -184,4 +184,23 @@ public class Guru : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, Ressources);
     }
 
+    public void InputRed()
+    {
+        signal = signaux.signalA;
+        Influence();
+    }
+
+    public void InputBlue()
+    {
+        signal = signaux.signalB;
+        Influence();
+    }
+
+    public void InputGreen()
+    {
+        signal = signaux.signalC;
+        Influence();
+    }
+
+
 }

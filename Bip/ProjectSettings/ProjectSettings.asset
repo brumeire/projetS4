@@ -6,7 +6,7 @@ PlayerSettings:
   serializedVersion: 10
   productGUID: 61123ea2076358e49a70b4b145fe6dfe
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 0
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -118,8 +118,8 @@ PlayerSettings:
     16:10: 0
     16:9: 1
     Others: 0
-  bundleIdentifier: com.Company.ProductName
-  bundleVersion: 1.0
+  bundleIdentifier: com.AnotherDoubleBobNewCompany.Aethernal
+  bundleVersion: 1.1
   preloadedAssets:
   - {fileID: 1478596384115448, guid: 6f3eebafea31c9e4f989130728d1b031, type: 2}
   metroInputSource: 0

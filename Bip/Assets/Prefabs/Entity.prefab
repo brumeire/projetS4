@@ -139,8 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8a1c6e2898b14cada9fd5504488b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 3.5
-  maxSpeed: 14.01
+  minSpeed: 2
+  maxSpeed: 10
   speedReductionPerSecond: 0.05
   velocityDebug: {x: 0, y: 0, z: 0}
   velocityAmount: 100
