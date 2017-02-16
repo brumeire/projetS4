@@ -5,5 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Proto1.unity
   - enabled: 1
-    path: Assets/Proto1.unity
+    path: Assets/Scenes/Mobile.unity

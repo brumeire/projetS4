@@ -37,7 +37,7 @@ public class Guru : MonoBehaviour {
 
         else if (Ressources >= 2.5f)
         {*/
-        Ressources += Time.deltaTime * lostPerTime;
+        Ressources -= Time.deltaTime * lostPerTime;
        // }
 
 
@@ -174,7 +174,7 @@ public class Guru : MonoBehaviour {
         /*if (Ressources < 2.5f)
             Ressources += modifRessource;
         else if (Ressources >= 2.5f)*/
-        Ressources -= modifRessource;
+        Ressources += modifRessource;
 
     }
 
