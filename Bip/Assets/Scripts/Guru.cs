@@ -227,7 +227,7 @@ public class Guru : MonoBehaviour {
 	public void scoring(){
 		if (Ressources > 0f) {
 			timer += Time.deltaTime * multiplicateur;
-			score.text = "score  =  " + Mathf.RoundToInt (timer).ToString ();
+			score.text = "score  =  " + Mathf.RoundToInt (timer).ToString () + "(X" + multiplicateur.ToString() +")";
 		} else {
 			score.text = "GAME OVER";
 		}
