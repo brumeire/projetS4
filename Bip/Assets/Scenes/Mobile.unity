@@ -1616,7 +1616,7 @@ Prefab:
     - target: {fileID: 114038398319421154, guid: a01b969000248e74baa95ad57b6dc09f,
         type: 2}
       propertyPath: Ressources
-      value: 2.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114038398319421154, guid: a01b969000248e74baa95ad57b6dc09f,
         type: 2}

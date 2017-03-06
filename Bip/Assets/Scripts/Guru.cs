@@ -23,6 +23,10 @@ public class Guru : MonoBehaviour {
 	public float timer;
 	public Text score;
 	public float RessourcesMax = 5f;
+	public float Startmulti = 4f;
+	float timerMulti;
+	public float upMulti = 2;
+	public float multiplicateur = 1f;
 
 
 
@@ -33,11 +37,13 @@ public class Guru : MonoBehaviour {
         /*signalA = false;
         signalB = false;
         signalC = false;*/
+		multiplicateur = 1f;
     }
 
     // Update is called once per frame
     void Update () {
 		scoring ();
+		multi ();
         /*if (Ressources < 2.5f)
         {
             Ressources -= Time.deltaTime * lostPerTime;
@@ -220,10 +226,24 @@ public class Guru : MonoBehaviour {
 
 	public void scoring(){
 		if (Ressources > 0f) {
-			timer += Time.deltaTime;
+			timer += Time.deltaTime * multiplicateur;
 			score.text = "score  =  " + Mathf.RoundToInt (timer).ToString ();
 		} else {
 			score.text = "GAME OVER";
 		}
 	}
+
+	public void multi(){
+
+		if (Ressources >= Startmulti) {
+			timerMulti += Time.deltaTime;
+			if (timerMulti >= upMulti) {
+				multiplicateur++;
+				timerMulti = 0;
+			}
+		} else {
+			multiplicateur = 1;
+		}
+	}
 }
+
