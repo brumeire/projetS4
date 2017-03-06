@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+
 
 public class Guru : MonoBehaviour {
 
@@ -18,6 +20,12 @@ public class Guru : MonoBehaviour {
     public bool signalB;
     public bool signalC;*/
 
+	public float timer;
+	public Text score;
+	public float RessourcesMax = 5f;
+
+
+
     public Material[] materials;
 
     // Use this for initialization
@@ -29,7 +37,7 @@ public class Guru : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
+		scoring ();
         /*if (Ressources < 2.5f)
         {
             Ressources -= Time.deltaTime * lostPerTime;
@@ -43,8 +51,16 @@ public class Guru : MonoBehaviour {
 
         transform.localScale = new Vector3(Ressources * 2, Ressources * 2, 0.1f);
 
-        if (Ressources >= 5 || Ressources <= 0)
-            Destroy(gameObject);
+        /*if (Ressources >= 5 || Ressources <= 0)
+            Destroy(gameObject);*/
+		if (Ressources <= 0) {
+			Ressources = 0;
+		}
+
+		if (Ressources >= RessourcesMax) {
+			Ressources = RessourcesMax;
+		}
+
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -202,5 +218,12 @@ public class Guru : MonoBehaviour {
         Influence();
     }
 
-
+	public void scoring(){
+		if (Ressources > 0f) {
+			timer += Time.deltaTime;
+			score.text = "score  =  " + Mathf.RoundToInt (timer).ToString ();
+		} else {
+			score.text = "GAME OVER";
+		}
+	}
 }
