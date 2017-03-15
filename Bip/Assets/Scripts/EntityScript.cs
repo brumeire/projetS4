@@ -16,7 +16,7 @@ public class EntityScript : MonoBehaviour {
 
     public Type type;
 
-    public Material[] entityMaterials;
+    public Sprite[] entitySprites;
 
     public float timerChange = 2.5f;
 
@@ -62,17 +62,17 @@ public class EntityScript : MonoBehaviour {
         switch (type)
         {
             case Type.A:
-                GetComponent<Renderer>().material = entityMaterials[0];
+                GetComponent<SpriteRenderer>().sprite = entitySprites[0];
                 tag = "A";
                 break;
 
             case Type.B:
-                GetComponent<Renderer>().material = entityMaterials[1];
+                GetComponent<SpriteRenderer>().sprite = entitySprites[1];
                 tag = "B";
                 break;
 
             case Type.C:
-                GetComponent<Renderer>().material = entityMaterials[2];
+                GetComponent<SpriteRenderer>().sprite = entitySprites[2];
                 tag = "C";
                 break;
 

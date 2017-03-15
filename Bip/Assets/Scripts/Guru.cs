@@ -19,6 +19,7 @@ public class Guru : MonoBehaviour {
     public bool signalC;*/
 
     public Material[] materials;
+    public GameObject restartButton;
 
     // Use this for initialization
     void Start () {
@@ -43,8 +44,11 @@ public class Guru : MonoBehaviour {
 
         transform.localScale = new Vector3(Ressources * 2, Ressources * 2, 0.1f);
 
-        if (Ressources >= 5 || Ressources <= 0)
+        if (Ressources <= 0)
+        {
+            restartButton.SetActive(true);
             Destroy(gameObject);
+        }
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -134,7 +138,7 @@ public class Guru : MonoBehaviour {
                 if (col.tag == "A")
                 {
                     col.GetComponent<MoveCube>().velocityAmount += 3;
-                    col.GetComponent<Rigidbody>().velocity = col.transform.position;
+                    //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                 }
             }
         }
@@ -148,7 +152,7 @@ public class Guru : MonoBehaviour {
                 if (col.tag == "B")
                 {
                     col.GetComponent<MoveCube>().velocityAmount += 3;
-                    col.GetComponent<Rigidbody>().velocity = col.transform.position;
+                    //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                 }
             }
         }
@@ -163,7 +167,7 @@ public class Guru : MonoBehaviour {
                 if (col.tag == "C")
                 {
                     col.GetComponent<MoveCube>().velocityAmount += 3;
-                    col.GetComponent<Rigidbody>().velocity = col.transform.position;
+                    //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                 }
             }
         }

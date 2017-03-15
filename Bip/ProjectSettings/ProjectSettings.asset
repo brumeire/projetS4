@@ -6,7 +6,7 @@ PlayerSettings:
   serializedVersion: 10
   productGUID: 61123ea2076358e49a70b4b145fe6dfe
   AndroidProfiler: 0
-  defaultScreenOrientation: 0
+  defaultScreenOrientation: 2
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -463,8 +463,11 @@ PlayerSettings:
   XboxOneAllowedProductIds: []
   XboxOnePersistentLocalStorageSize: 0
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudServicesEnabled:
+    Build: 0
+    Collab: 1
+    UNet: 1
+  cloudProjectId: 5fcf4098-7940-4f88-aa1e-5a50696cf88e
+  projectName: Obso
+  organizationId: brumeire
   cloudEnabled: 0

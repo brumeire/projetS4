@@ -19,12 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4726084203248992}
-  - component: {fileID: 33601795141717674}
-  - component: {fileID: 23872301321074722}
   - component: {fileID: 114356903394039640}
   - component: {fileID: 114219597054818036}
   - component: {fileID: 54563083236352968}
   - component: {fileID: 135178907959309038}
+  - component: {fileID: 212483834703668874}
   m_Layer: 8
   m_Name: Entity
   m_TagString: Untagged
@@ -68,51 +67,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1478596384115448}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.33, y: 1.13, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.8, y: 2.27, z: -1}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_Children:
   - {fileID: 4274288556351188}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23872301321074722
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1478596384115448}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &33601795141717674
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1478596384115448}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54563083236352968
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -155,14 +116,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b8364e8a74c4349a2bdbd0db075b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tailleMin: 1
-  tailleMax: 1
-  type: 0
-  entityMaterials:
-  - {fileID: 2100000, guid: 83cc2caddad525c478805215b81da1fb, type: 2}
-  - {fileID: 2100000, guid: fdb89575891afea47866268225e12df8, type: 2}
-  - {fileID: 2100000, guid: f51b8d004ab099946b1a6d7a4fdae597, type: 2}
-  - {fileID: 2100000, guid: c1f8a9e48a51b18469b31b5376ffcbca, type: 2}
+  tailleMin: 0.12
+  tailleMax: 0.12
+  type: 1
+  entitySprites:
+  - {fileID: 21300000, guid: 62694c5fa0da37343b43830d62a2894e, type: 3}
+  - {fileID: 21300000, guid: 9f5bc67fc9b585141af2fa0b0a4ef6cb, type: 3}
+  - {fileID: 21300000, guid: cce0e03bf10ef8341bf228916c62d663, type: 3}
   timerChange: 0.2
 --- !u!135 &135178907959309038
 SphereCollider:
@@ -174,8 +134,43 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 6.611499
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!212 &212483834703668874
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1478596384115448}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 9f5bc67fc9b585141af2fa0b0a4ef6cb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!212 &212957814838504378
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -8,11 +8,11 @@ public class WallScript : MonoBehaviour {
     {
         if (collision.gameObject.tag == "A" || collision.gameObject.tag == "B" || collision.gameObject.tag == "C")
         {
-            Debug.Log("Rebond");
-            //collision.gameObject.GetComponent<Rigidbody>().velocity = -collision.gameObject.transform.position;
+            //Debug.Log("Rebond");
+            collision.gameObject.GetComponent<Rigidbody>().velocity = -collision.gameObject.transform.position;
             //Vector3 dirOpposee = collision.contacts[0].normal;
             
-            collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.Reflect(GetComponent<Rigidbody>().velocity, normal);
+            //collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.Reflect(GetComponent<Rigidbody>().velocity, normal);
         }
     }
 
