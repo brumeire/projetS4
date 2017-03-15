@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Guru : MonoBehaviour {
 
+    #region variables
     public enum signaux {
         signalA,
         signalB,
@@ -18,19 +20,34 @@ public class Guru : MonoBehaviour {
     public bool signalB;
     public bool signalC;*/
 
+    public float timer;
+    public Text score;
+    public float RessourcesMax = 5;
+    public float Startmulti = 4;
+    float timerMulti;
+    public float upMulti = 2;
+    public float multiplicateur = 1;
+
+
     public Material[] materials;
     public GameObject restartButton;
 
+    #endregion variables
+
+    #region Unity Functions
     // Use this for initialization
     void Start () {
         /*signalA = false;
         signalB = false;
         signalC = false;*/
+        multiplicateur = 1;
     }
 
     // Update is called once per frame
     void Update () {
 
+        Scoring();
+        Multi();
         /*if (Ressources < 2.5f)
         {
             Ressources -= Time.deltaTime * lostPerTime;
@@ -46,9 +63,13 @@ public class Guru : MonoBehaviour {
 
         if (Ressources <= 0)
         {
+            Ressources = 0;
             restartButton.SetActive(true);
             Destroy(gameObject);
         }
+
+        if (Ressources >= RessourcesMax)
+            Ressources = RessourcesMax;
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -93,6 +114,16 @@ public class Guru : MonoBehaviour {
 
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, Ressources);
+    }
+
+
+    #endregion Unity Functions
+
+    #region Custom Functions
     void Influence ()
     {
         Vector3 pos = transform.position;
@@ -182,12 +213,7 @@ public class Guru : MonoBehaviour {
 
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, Ressources);
-    }
-
+    
     public void InputRed()
     {
         signal = signaux.signalA;
@@ -207,4 +233,37 @@ public class Guru : MonoBehaviour {
     }
 
 
+    public void Scoring()
+    {
+        if (Ressources > 0)
+        {
+            timer += Time.deltaTime * multiplicateur;
+            score.text = "score = " + Mathf.RoundToInt(timer).ToString() + "(X " + multiplicateur.ToString()+")";
+        }
+
+        else if (Ressources <= 0)
+        {
+            score.text = "GAME OVER";
+        }
+    }
+
+    public void Multi()
+    {
+        if (Ressources >= Startmulti)
+        {
+            timerMulti += Time.deltaTime;
+            if (timerMulti >= upMulti)
+            {
+                multiplicateur++;
+                timerMulti = 0;
+            }
+        }
+
+        else if (Ressources < Startmulti)
+        {
+            multiplicateur = 1;
+        }
+    }
+
+    #endregion Custom Functions
 }
