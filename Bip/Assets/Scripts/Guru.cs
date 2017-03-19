@@ -22,7 +22,7 @@ public class Guru : MonoBehaviour {
 
     public float timer;
     public Text score;
-    public float RessourcesMax = 5;
+    public float RessourcesMax = 10;
     public float Startmulti = 4;
     float timerMulti;
     public float upMulti = 2;
@@ -37,26 +37,18 @@ public class Guru : MonoBehaviour {
     #region Unity Functions
     // Use this for initialization
     void Start () {
-        /*signalA = false;
-        signalB = false;
-        signalC = false;*/
+
         multiplicateur = 1;
     }
 
     // Update is called once per frame
     void Update () {
-
+        Debug.Log(Ressources);
         Scoring();
         Multi();
-        /*if (Ressources < 2.5f)
-        {
-            Ressources -= Time.deltaTime * lostPerTime;
-        }
-
-        else if (Ressources >= 2.5f)
-        {*/
+        
         Ressources -= Time.deltaTime * lostPerTime;
-       // }
+       
 
 
         transform.localScale = new Vector3(Ressources * 2, Ressources * 2, 0.1f);
@@ -89,28 +81,6 @@ public class Guru : MonoBehaviour {
             signal = signaux.signalC;
             Influence();
         }
-
-
-
-        /*if (Input.GetKey(KeyCode.A))
-        {
-            GetComponent<Renderer>().material = materials[1];
-        }
-
-        else if (Input.GetKey(KeyCode.Z))
-        {
-            GetComponent<Renderer>().material = materials[2];
-        }
-
-        else if (Input.GetKey(KeyCode.E))
-        {
-            GetComponent<Renderer>().material = materials[3];
-        }
-        else
-        {
-            GetComponent<Renderer>().material = materials[0];
-        }*/
-
 
     }
 

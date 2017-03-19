@@ -5,8 +5,8 @@ using UnityEngine;
 public class MoveCube : MonoBehaviour
 {
     //private ConstantForce constantForce;
-    public float minSpeed = 2;
-    public float maxSpeed = 5;
+    public static float minSpeed = 2;
+    public static float maxSpeed = 5;
     public float speedReductionPerSecond = 0.2f;
     public Vector3 velocityDebug;
 
@@ -26,7 +26,7 @@ public class MoveCube : MonoBehaviour
     void Update()
     {
         velocityDebug = GetComponent<Rigidbody>().velocity;
-        //velocityAmount = GetComponent<Rigidbody>().velocity.magnitude;
+
 
         if (velocityAmount > minSpeed)
             velocityAmount -= speedReductionPerSecond;
@@ -40,24 +40,5 @@ public class MoveCube : MonoBehaviour
 
         GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * velocityAmount;
     }
-
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Wall")
-        {
-            /*Vector3 dirOpposee = collision.contacts[0].normal;
-            Vector3 dirInc = transform.up;
-
-            transform.up = -dirInc;
-            transform.eulerAngles += new Vector3(0, 0, Vector3.Angle(-dirInc, dirOpposee) * 2);*/
-
-           // GetComponent<Rigidbody>().velocity = transform.position.normalized * velocityAmount;
-
-       // }
-       /* else
-        {
-            transform.up = -transform.position;
-        }*/
-    //}
 
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EntityScript : MonoBehaviour {
 
-    public float tailleMin;
-    public float tailleMax;
+
+    public float Taille;
 
     public enum Type
     {
@@ -25,25 +25,9 @@ public class EntityScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        /*int rand = Random.Range(0, 3);
 
-        switch (rand)
-        {
-            case 0:
-                type = Type.A;
-                break;
+      //  transform.localScale = transform.localScale * Taille;
 
-            case 1:
-                type = Type.B;
-                break;
-
-            case 2:
-                type = Type.C;
-                break;
-
-        }*/
-        float randTaille = Random.Range(tailleMin, tailleMax);
-        transform.localScale = new Vector3(randTaille, randTaille, randTaille);
 
         ChangeType(type);
 		
@@ -51,6 +35,8 @@ public class EntityScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Taille = EntitySpawn.taille;
+        transform.localScale =  new Vector3(Taille,Taille,Taille);
 
     }
 
