@@ -9,9 +9,10 @@ public class EntityScript : MonoBehaviour {
 
     public enum Type
     {
-        A,
-        B,
-        C
+        Red,
+        Blue,
+        Yellow,
+        None
     }
 
     public Type type;
@@ -47,17 +48,17 @@ public class EntityScript : MonoBehaviour {
 
         switch (type)
         {
-            case Type.A:
+            case Type.Red:
                 GetComponent<SpriteRenderer>().sprite = entitySprites[0];
                 tag = "A";
                 break;
 
-            case Type.B:
+            case Type.Blue:
                 GetComponent<SpriteRenderer>().sprite = entitySprites[1];
                 tag = "B";
                 break;
 
-            case Type.C:
+            case Type.Yellow:
                 GetComponent<SpriteRenderer>().sprite = entitySprites[2];
                 tag = "C";
                 break;
@@ -67,60 +68,9 @@ public class EntityScript : MonoBehaviour {
 
     }
 
-    public void ReceiveSignal(Guru.signaux signal)
+    private void OnDestroy()
     {
-
-        /*switch (tag)
-        {
-            case "A":
-
-                if (signal == Guru.signaux.signalA)
-                {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources += 0.3f;
-                }
-
-                else if (signal == Guru.signaux.signalB)
-                {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 0.3f;
-                }
-
-                break;
-
-
-
-            case "B":
-
-                if (signal == Guru.signaux.signalB)
-                {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources += 0.3f;
-                }
-
-                else if (signal == Guru.signaux.signalC)
-                {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 0.3f;
-                }
-
-                break;
-
-
-
-            case "C":
-
-                if (signal == Guru.signaux.signalC)
-                {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources += 0.3f;
-                }
-
-                else if (signal == Guru.signaux.signalA)
-                {
-                    GameObject.Find("GURU").GetComponent<Guru>().Ressources -= 0.3f;
-                }
-
-                break;
-
-        }*/
-
-
+        SpawnerScript.entitiesAlive.Remove(gameObject);
     }
 
 }

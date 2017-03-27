@@ -12,13 +12,15 @@ public class Reset : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.R))
-            ReloadCurrentScene();
+        /*if (Input.GetKeyDown(KeyCode.R))
+            ReloadCurrentScene();*/
 	}
 
     public void ReloadCurrentScene()
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
+        MoveCube.minSpeed = 2;
+        MoveCube.maxSpeed = 5;
     }
 
 }

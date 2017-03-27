@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c073357ea090a8046a8ea34fd4d12c4b
+timeCreated: 1490605010
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: VMF_Style_ttf
+  fontNames:
+  - VMF_Style_ttf
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

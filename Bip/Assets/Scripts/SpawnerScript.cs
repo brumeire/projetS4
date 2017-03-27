@@ -14,9 +14,11 @@ public class SpawnerScript : MonoBehaviour {
     public int numberToSpawn = 1;
 
 
+    public static List<GameObject> entitiesAlive = new List<GameObject>();
+
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
