@@ -14,7 +14,6 @@ public class Guru : MonoBehaviour {
     public signaux signal;
 
     public float Ressources;
-    public float lostPerTime;
     public float lostOnFail = 0.5f;
 
 
@@ -42,6 +41,8 @@ public class Guru : MonoBehaviour {
 
     public static Guru instance;
 
+    public Animator animPulse;
+
     #endregion variables
 
     #region Unity Functions
@@ -52,91 +53,83 @@ public class Guru : MonoBehaviour {
         multiplicateur = 1;
     }
 
-    // Update is called once per frame
+
     void Update () {
-        //Debug.Log(Ressources);
-        //Scoring();
-        //Multi();
-        
-        Ressources -= Time.deltaTime * lostPerTime;
 
-		if (InputMngr.instance.redActivated || InputMngr.instance.blueActivated || InputMngr.instance.yellowActivated)
+        if (EntitySpawn.gameStarted)
         {
-		    Influence();
-		}
 
+            Ressources -= Time.deltaTime * Mngr.instance.lossSizeSpeed;
 
-        if (Ressources <= 0 && !Mngr.instance.avatarMinSizeEnabled)
-        {
-            Ressources = 0;
-            restartButton.SetActive(true);
-            Destroy(gameObject);
-        }
-
-        if (Ressources >= RessourcesMax)
-            Ressources = RessourcesMax;
-        
-
-        if (Mngr.instance.avatarMinSizeEnabled)
-        {
-            if (Ressources <= Mngr.instance.avatarMinSize)
+            if (InputMngr.instance.redActivated || InputMngr.instance.blueActivated || InputMngr.instance.yellowActivated)
             {
-                Ressources = Mngr.instance.avatarMinSize;
+                Influence();
+            }
 
-                if (!timerDeathLaunched)
+
+            if (Ressources <= 0 && !Mngr.instance.avatarMinSizeEnabled)
+            {
+                Ressources = 0;
+                restartButton.SetActive(true);
+                Destroy(gameObject);
+            }
+
+			if (Ressources >= RessourcesMax) {
+				Ressources = RessourcesMax;
+
+			}
+
+            if (Mngr.instance.avatarMinSizeEnabled)
+            {
+                if (Ressources <= Mngr.instance.avatarMinSize)
                 {
-                    timerDeathLaunched = true;
+                    Ressources = Mngr.instance.avatarMinSize;
+
+                    if (!timerDeathLaunched)
+                    {
+                        timerDeathLaunched = true;
+                        timerDeath = Mngr.instance.avatarMinSizeTimeBeforeDestroy;
+                        Mngr.instance.countDown.SetActive(true);
+                        SoundManager.instance.PlayCriticalState();
+                    }
+
+                    timerDeath -= Time.deltaTime;
+
+                    Mngr.instance.countDown.GetComponent<Text>().text = Mathf.CeilToInt(timerDeath).ToString();
+
+                    if (timerDeath <= 0)
+                    {
+                        restartButton.SetActive(true);
+                        Mngr.instance.countDown.SetActive(false);
+                        SoundManager.instance.StopCriticalState();
+                        Destroy(gameObject);
+                    }
+                }
+
+                else if (timerDeathLaunched)
+                {
+                    timerDeathLaunched = false;
                     timerDeath = Mngr.instance.avatarMinSizeTimeBeforeDestroy;
-                    Mngr.instance.countDown.SetActive(true);
-                    SoundManager.instance.PlayCriticalState();
-                }
-
-                timerDeath -= Time.deltaTime;
-
-                Mngr.instance.countDown.GetComponent<Text>().text = Mathf.CeilToInt(timerDeath).ToString();
-
-                if (timerDeath <= 0)
-                {
-                    restartButton.SetActive(true);
                     Mngr.instance.countDown.SetActive(false);
+                    restartButton.SetActive(true);
                     SoundManager.instance.StopCriticalState();
-                    Destroy(gameObject);
+					Handheld.Vibrate();
                 }
             }
 
-            else if (timerDeathLaunched)
-            {
-                timerDeathLaunched = false;
-                timerDeath = Mngr.instance.avatarMinSizeTimeBeforeDestroy;
-                Mngr.instance.countDown.SetActive(false);
-                SoundManager.instance.StopCriticalState();
-            }
+
+            transform.localScale = new Vector3(Ressources * 2, Ressources * 2, 0.1f);
+
+            
         }
 
 
         transform.localScale = new Vector3(Ressources * 2, Ressources * 2, 0.1f);
 
+        //PULSE ANIMATION
 
+        animPulse.SetFloat("Pulse Speed", Mathf.Lerp(2, 0.2f, (Ressources - Mngr.instance.avatarMinSize) / (RessourcesMax - Mngr.instance.avatarMinSize)));
 
-
-       /*if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            signal = signaux.signalA;
-            Influence();
-        }
-       
-        else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            signal = signaux.signalB;
-            Influence();
-        }
-        
-
-        else if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            signal = signaux.signalC;
-            Influence();
-        }*/
 
     }
 
@@ -194,11 +187,6 @@ public class Guru : MonoBehaviour {
                 || (numbOfRed == numbOfBlue && numbOfRed > 0 && InputMngr.instance.blueActivated && !InputMngr.instance.yellowActivated)
                 || (numbOfRed == numbOfGreen && numbOfRed > 0 && InputMngr.instance.yellowActivated && !InputMngr.instance.blueActivated))
                 )
-
-
-        /*(numbOfRed > numbOfBlue || (numbOfRed == numbOfBlue && numbOfRed >= numbOfGreen && numbOfRed > 0)) 
-        && (numbOfRed > numbOfGreen || (numbOfRed == numbOfGreen && numbOfRed >= numbOfBlue && numbOfRed > 0))
-        && InputMngr.instance.redActivated)*/
         {
             modifRessource += Mngr.instance.gainSizeSpeed * Time.deltaTime;
             Collider[] targets = Physics.OverlapSphere(pos, res);
@@ -207,9 +195,8 @@ public class Guru : MonoBehaviour {
             {
                 if (col.tag == "A")
                 {
-                    col.GetComponent<MoveCube>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
+					//col.GetComponent<EntityScript>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
 
-                    JaugeManager.instance.FillJauge(EntityScript.Type.Red);
                     //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                 }
             }
@@ -224,9 +211,8 @@ public class Guru : MonoBehaviour {
                 {
                     if (col.tag == "B")
                     {
-                        col.GetComponent<MoveCube>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
+						//col.GetComponent<EntityScript>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
 
-                        JaugeManager.instance.FillJauge(EntityScript.Type.Blue);
                         //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                     }
                 }
@@ -241,9 +227,8 @@ public class Guru : MonoBehaviour {
                 {
                     if (col.tag == "C")
                     {
-                        col.GetComponent<MoveCube>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
+						//col.GetComponent<EntityScript>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
 
-                        JaugeManager.instance.FillJauge(EntityScript.Type.Yellow);
                         //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                     }
                 }
@@ -264,16 +249,15 @@ public class Guru : MonoBehaviour {
         {
             modifRessource += Mngr.instance.gainSizeSpeed * Time.deltaTime;
             Collider[] targets = Physics.OverlapSphere(pos, res);
-            foreach (Collider col in targets)
+            /*foreach (Collider col in targets)
             {
                 if (col.tag == "B")
                 {
-                    col.GetComponent<MoveCube>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
+					//col.GetComponent<EntityScript>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
 
-                    JaugeManager.instance.FillJauge(EntityScript.Type.Blue);
                     //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                 }
-            }
+            }*/
 
 
             if ((numbOfRed > numbOfGreen || (numbOfRed == numbOfGreen && numbOfRed > 0)) && InputMngr.instance.redActivated)
@@ -281,16 +265,15 @@ public class Guru : MonoBehaviour {
                 modifRessource += Mngr.instance.gainSizeSpeed * Time.deltaTime;
                 Collider[] otherTargets = Physics.OverlapSphere(pos, res);
 
-                foreach (Collider col in targets)
+                /*foreach (Collider col in targets)
                 {
                     if (col.tag == "A")
                     {
-                        col.GetComponent<MoveCube>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
+						//col.GetComponent<EntityScript>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
 
-                        JaugeManager.instance.FillJauge(EntityScript.Type.Red);
                         //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                     }
-                }
+                }*/
             }
 
             else if ((numbOfGreen > numbOfRed || (numbOfGreen == numbOfRed && numbOfGreen > 0)) && InputMngr.instance.yellowActivated)
@@ -298,16 +281,15 @@ public class Guru : MonoBehaviour {
                 modifRessource += Mngr.instance.gainSizeSpeed * Time.deltaTime;
                 Collider[] otherTargets = Physics.OverlapSphere(pos, res);
 
-                foreach (Collider col in targets)
+                /*foreach (Collider col in targets)
                 {
                     if (col.tag == "C")
                     {
-                        col.GetComponent<MoveCube>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
+						//col.GetComponent<EntityScript>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
 
-                        JaugeManager.instance.FillJauge(EntityScript.Type.Yellow);
                         //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                     }
-                }
+                }*/
             }
 
         }
@@ -327,13 +309,12 @@ public class Guru : MonoBehaviour {
             Collider[] targets = Physics.OverlapSphere(pos, res);
             foreach (Collider col in targets)
             {
-                if (col.tag == "C")
+                /*if (col.tag == "C")
                 {
-                    col.GetComponent<MoveCube>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
+					//col.GetComponent<EntityScript>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
 
-                    JaugeManager.instance.FillJauge(EntityScript.Type.Yellow);
                     //col.GetComponent<Rigidbody>().velocity = col.transform.position;
-                }
+                }*/
             }
 
             if ((numbOfBlue > numbOfRed || (numbOfBlue == numbOfRed && numbOfBlue > 0)) && InputMngr.instance.blueActivated)
@@ -341,16 +322,15 @@ public class Guru : MonoBehaviour {
                 modifRessource += Mngr.instance.gainSizeSpeed * Time.deltaTime;
                 Collider[] otherTargets = Physics.OverlapSphere(pos, res);
 
-                foreach (Collider col in targets)
+                /*foreach (Collider col in targets)
                 {
                     if (col.tag == "B")
                     {
-                        col.GetComponent<MoveCube>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
+						//col.GetComponent<EntityScript>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
 
-                        JaugeManager.instance.FillJauge(EntityScript.Type.Blue);
                         //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                     }
-                }
+                }*/
             }
 
             else if ((numbOfRed > numbOfBlue || (numbOfRed == numbOfBlue && numbOfRed > 0)) && InputMngr.instance.redActivated)
@@ -358,16 +338,15 @@ public class Guru : MonoBehaviour {
                 modifRessource += Mngr.instance.gainSizeSpeed * Time.deltaTime;
                 Collider[] otherTargets = Physics.OverlapSphere(pos, res);
 
-                foreach (Collider col in targets)
+                /*foreach (Collider col in targets)
                 {
                     if (col.tag == "A")
                     {
-                        col.GetComponent<MoveCube>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
+						//col.GetComponent<EntityScript>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
 
-                        JaugeManager.instance.FillJauge(EntityScript.Type.Red);
                         //col.GetComponent<Rigidbody>().velocity = col.transform.position;
                     }
-                }
+                }*/
             }
         }
 
@@ -376,97 +355,25 @@ public class Guru : MonoBehaviour {
             modifRessource += Mngr.instance.gainSizeSpeed * Time.deltaTime;
             Collider[] targets = Physics.OverlapSphere(pos, res);
 
-            foreach (Collider col in targets)
+            /*foreach (Collider col in targets)
             {
                 if (col.tag == "A" || col.tag == "B" || col.tag == "C")
                 {
-                    col.GetComponent<MoveCube>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
+					//col.GetComponent<EntityScript>().velocityAmount += Mngr.instance.speedBoostOnInput * Time.deltaTime;
                 }
 
 
-            }
+            }*/
         }
-        //else if (!((numbOfRed == numbOfBlue && numbOfRed >= numbOfGreen) || (numbOfRed == numbOfGreen && numbOfRed >= numbOfBlue) || (numbOfBlue == numbOfGreen && numbOfBlue >= numbOfRed)))
-		//	modifRessource -= lostOnFail * Time.deltaTime;
-
-        /*if (Ressources < 2.5f)
-            Ressources += modifRessource;
-        else if (Ressources >= 2.5f)*/
+		else if (InputMngr.instance.yellowActivated || InputMngr.instance.blueActivated || InputMngr.instance.redActivated){
+			Ressources -= lostOnFail * Time.deltaTime;
+		}
         Ressources += modifRessource;
 
+
+
     }
 
-	/*public void okRed(){
-		inputRed = true;
-	}
-	public void nopRed(){
-		inputRed = false;
-	}
-	public void okBlue(){
-		inputBlue = true;
-	}
-	public void nopBlue(){
-		inputBlue = false;
-	}
-	public void okGreen(){
-		inputGreen = true;
-	}
-	public void nopGreen(){
-		inputGreen = false;
-	}*/
-    
-   /* public void InputRed()
-    {
-        signal = signaux.signalA;
-        Influence();
-    }
-
-    public void InputBlue()
-    {
-        signal = signaux.signalB;
-        Influence();
-    }
-
-    public void InputGreen()
-    {
-        signal = signaux.signalC;
-        Influence();
-    }*/
-
-
-    public void Scoring()
-    {
-        if (Ressources > 0)
-        {
-            timer += Time.deltaTime * multiplicateur;
-            score.text = "score = " + Mathf.RoundToInt(timer).ToString() + "(X " + multiplicateur.ToString()+")";
-        }
-
-        else if (Ressources <= 0)
-        {
-            score.text = "GAME OVER";
-        }
-    }
-
-    public void Multi()
-    {
-        if (Ressources >= Startmulti)
-        {
-			gameObject.GetComponent<Renderer> ().material.color = Color.cyan;
-            timerMulti += Time.deltaTime;
-            if (timerMulti >= upMulti)
-            {
-                multiplicateur++;
-                timerMulti = 0;
-            }
-        }
-
-        else if (Ressources < Startmulti)
-        {
-			gameObject.GetComponent<Renderer> ().material.color = Color.black;
-            multiplicateur = 1;
-        }
-    }
 
     #endregion Custom Functions
 }

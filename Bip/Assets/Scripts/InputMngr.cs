@@ -46,7 +46,7 @@ public class InputMngr : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (!redActivated /*&& (!blueActivated || !yellowActivated)*/)
+            if (!redActivated)
             {
                 redActivated = true;
             }
@@ -56,7 +56,7 @@ public class InputMngr : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (!blueActivated /*&& (!redActivated || !yellowActivated)*/)
+            if (!blueActivated)
             {
                 blueActivated = true;
             }
@@ -66,7 +66,7 @@ public class InputMngr : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (!yellowActivated /*&& (!redActivated || !blueActivated)*/)
+            if (!yellowActivated)
             {
                 yellowActivated = true;
             }
@@ -100,21 +100,21 @@ public class InputMngr : MonoBehaviour {
         switch (input.type)
         {
             case EntityScript.Type.Red:
-                if (!redActivated /*&& (!blueActivated || !yellowActivated)*/)
+                if (!redActivated)
                 {
                     redActivated = true;
                 }
                 break;
 
             case EntityScript.Type.Blue:
-                if (!blueActivated /*&& (!redActivated || !yellowActivated)*/)
+                if (!blueActivated)
                 {
                     blueActivated = true;
                 }
                 break;
 
             case EntityScript.Type.Yellow:
-                if (!yellowActivated /*&& (!redActivated || !blueActivated)*/)
+                if (!yellowActivated)
                 {
                     yellowActivated = true;
                 }

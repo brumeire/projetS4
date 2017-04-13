@@ -19,8 +19,9 @@ public class Reset : MonoBehaviour {
     public void ReloadCurrentScene()
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
-        MoveCube.minSpeed = 2;
-        MoveCube.maxSpeed = 5;
+		//EntityScript.minSpeed = 2;
+		//EntityScript.maxSpeed = 5;
+        EntitySpawn.instance.StartGame();
     }
 
 }

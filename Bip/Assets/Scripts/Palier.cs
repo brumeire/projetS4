@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Palier {
+public class Palier
+{
+	public int IterationsBeforeNextPalier = 1;
 
-    public float timeBeforeNext;
-
-    public float globalSize = 1;
-	//public bool changeSpeed;
-	public float speedChange = 0;
-
-    public List<EntityToCreate> entitiesToSpawn = new List<EntityToCreate>();
-
-
+    public List<Iteration> iterations = new List<Iteration>();
 }
+
+
+
 
 [System.Serializable]
 public class EntityToCreate
@@ -22,8 +19,6 @@ public class EntityToCreate
     public bool typeChosenToEquilibrate = false;
     public EntityScript.Type type;
 
-    public float additionalSpeed;
+    public float additionalSpeed = 0;
 
-    //public bool changeSize;
-    //public float size;
 }
