@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class entitiesScript : MonoBehaviour {
+public class EntitiesScript : MonoBehaviour {
 
 	public enum Type
 	{
@@ -10,7 +10,7 @@ public class entitiesScript : MonoBehaviour {
 		Blue,
 		Yellow
 	}
-	public Type COULOUR;
+	public Type color;
 
 	public float taille;
 	public int positionInCircle;
@@ -18,7 +18,7 @@ public class entitiesScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ChangeType (COULOUR);
+		ChangeType (color);
 		transform.localScale = new Vector3 (taille, taille, taille);
 	}
 
@@ -27,16 +27,16 @@ public class entitiesScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		ChangeType (COULOUR);
+		ChangeType (color);
 		transform.localScale = new Vector3 (taille, taille, taille);
 	}
 
 
 	public void ChangeType (Type newType)
 	{
-		COULOUR = newType;
+		color = newType;
 
-		switch (COULOUR) {
+		switch (color) {
 		case Type.Red:
 			GetComponent<Renderer> ().material.color = Color.red;
 			break;

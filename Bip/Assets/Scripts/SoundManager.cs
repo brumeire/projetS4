@@ -6,27 +6,54 @@ using FMODUnity;
 public class SoundManager : MonoBehaviour {
 
     [EventRef]
-    public string eventCriticalState;
+    public string eventBackgroundMusic;
 
-    private FMOD.Studio.EventInstance criticalStateInstance = null;
+    private FMOD.Studio.EventInstance bckgrndMusic = null;
+
+    public FMOD.Studio.ParameterInstance musicParam;
+
+    public float initialTimeToBaseMusic = 2;
+
+    private float musicParamFloat;
 
     public static SoundManager instance;
 
-    public void Start()
+    public void Awake()
     {
         instance = this;
-        criticalStateInstance = RuntimeManager.CreateInstance(eventCriticalState);
+        bckgrndMusic = RuntimeManager.CreateInstance(eventBackgroundMusic);
+        bckgrndMusic.getParameter("Parameter 1", out musicParam);
+        musicParamFloat = 0.2f;
+        musicParam.setValue(musicParamFloat);
+        bckgrndMusic.start();
     }
 
-
-    public void PlayCriticalState()
+    public void Update()
     {
-        criticalStateInstance.start();
-    }
+        if (!Guru.Gold && !Guru.CriticalState && musicParamFloat != 0.4f)
+        {
+            musicParamFloat = Mathf.MoveTowards(musicParamFloat, 0.4f, initialTimeToBaseMusic * Time.deltaTime);
 
-    public void StopCriticalState()
-    {
-        criticalStateInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            musicParam.setValue(musicParamFloat);
+        }
+
+        else if (Guru.Gold)
+        {
+            musicParamFloat = Mathf.MoveTowards(musicParamFloat, 0, initialTimeToBaseMusic * Time.deltaTime);
+
+            musicParam.setValue(musicParamFloat);
+        }
+
+        else if (Guru.CriticalState)
+        {
+            musicParamFloat = Mathf.MoveTowards(musicParamFloat, 0.65f, initialTimeToBaseMusic * Time.deltaTime);
+
+            musicParam.setValue(musicParamFloat);
+        }
+
+
+
+
     }
 
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="EffectPreset" id="{56563ac7-5add-0ed1-3815-181adffaba2a}">
+        <property name="name">
+            <value>FMOD Pitch Shifter</value>
+        </property>
+        <relationship name="folder">
+            <destination>{ff17e007-5c91-029f-1d64-816188cb5fb3}</destination>
+        </relationship>
+        <relationship name="effect">
+            <destination>{6930f53e-55f9-4c12-b9c5-19edd3666325}</destination>
+        </relationship>
+    </object>
+    <object class="PitchShifterEffect" id="{6930f53e-55f9-4c12-b9c5-19edd3666325}">
+        <property name="pitch">
+            <value>2</value>
+        </property>
+    </object>
+</objects>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Iteration : ScriptableObject
+public class Iteration
 {
     public float timeBeforeNextIteration = 10;
 
@@ -11,6 +11,6 @@ public class Iteration : ScriptableObject
 
     public bool loadLast = false;
 
-    public List<GameObject> patternsToSpawn = new List<GameObject>();
+    public List<Pattern> patternsToSpawn = new List<Pattern>();
 
 }

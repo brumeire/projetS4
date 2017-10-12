@@ -17,74 +17,193 @@ public class EntityScript : MonoBehaviour {
 	public Color baseColor;
 
 
-	public EntityScript.Type COULOUR;
+	public EntityScript.Type color;
 
-	public Color[] entityColors;
+	//public Color[] entityColors;
+    public Sprite[] entitySprites;
+    public Sprite[] haloSprites;
+
 	public float taille;
 	public int positionInCircle;
 
+    public bool overlapAvatar;
+    private bool overlapAvatarPreviousFrame;
+
+    public Sprite[] lifePointsSprites;
+
+    public GameObject vieAgentPrefab;
+    private GameObject vieAgentSprite;
+
+    public GameObject[] deathParticuleSystems;
+
+
+
 	void Start(){
-		ChangeType(COULOUR);
+
+        EntitySpawn.entitiesAlive.Add(gameObject);
+
+        switch (color)
+        {
+            case Type.Red:
+                Mngr.instance.reds++;
+                break;
+
+            case Type.Blue:
+                Mngr.instance.blues++;
+                break;
+
+            case Type.Yellow:
+                Mngr.instance.yellows++;
+                break;
+        }
+
+        vieAgentSprite = Instantiate(vieAgentPrefab, transform.position, Quaternion.identity, transform);
+        vieAgentSprite.SetActive(false);
+
+        ChangeType(color);
 
         taille = Mngr.instance.tailleAgents;
         transform.localScale = new Vector3(taille, taille, taille);
-
+        
     }
 
 	void Update(){
 
-		taille = Mngr.instance.tailleAgents;
-		transform.localScale =  new Vector3(taille, taille, taille);
+        //taille = Mngr.instance.tailleAgents;
+        //transform.localScale =  new Vector3(taille, taille, taille);
+        if (Mngr.instance.gameStarted && !Mngr.instance.gamePaused)
+        {
+            if (overlapAvatar != overlapAvatarPreviousFrame)
+            {
+                overlapAvatarPreviousFrame = overlapAvatar;
 
+                if (overlapAvatar)
+                {
+                    vieAgentSprite.gameObject.SetActive(true);
+
+                    switch (color)
+                    {
+                        case Type.Red:
+                            GetComponent<SpriteRenderer>().sprite = haloSprites[0];
+                            break;
+
+                        case Type.Blue:
+                            GetComponent<SpriteRenderer>().sprite = haloSprites[1];
+                            break;
+
+                        case Type.Yellow:
+                            GetComponent<SpriteRenderer>().sprite = haloSprites[2];
+                            break;
+                    }
+
+                    //GetComponent<_2dxFX_EdgeColor>().enabled = true;
+                }
+
+                else
+                {
+                    vieAgentSprite.gameObject.SetActive(false);
+
+                    switch (color)
+                    {
+                        case Type.Red:
+                            GetComponent<SpriteRenderer>().sprite = entitySprites[0];
+                            break;
+
+                        case Type.Blue:
+                            GetComponent<SpriteRenderer>().sprite = entitySprites[1];
+                            break;
+
+                        case Type.Yellow:
+                            GetComponent<SpriteRenderer>().sprite = entitySprites[2];
+                            break;
+                    }
+                    //GetComponent<_2dxFX_EdgeColor>().enabled = false;
+                }
+            }
+
+            if (overlapAvatar)
+            {
+                SendMessageUpwards("OverlapInProgress", color);
+            }
+        }
 	}
 
-	public void ChangeType (EntityScript.Type newType)
+    private void LateUpdate()
+    {
+        if (Mngr.instance.gameStarted && !Mngr.instance.gamePaused)
+            overlapAvatar = false;
+    }
+
+    public void ChangeType (EntityScript.Type newType)
 	{
-		COULOUR = newType;
+        color = newType;
 
-		switch (COULOUR)
+		switch (color)
 		{
-		case EntityScript.Type.Red:
-			baseColor = entityColors[0];
-			GetComponent<SpriteRenderer>().color = baseColor;
-			tag = "A";
-			break;
+		    case EntityScript.Type.Red:
+			    GetComponent<SpriteRenderer>().sprite = entitySprites[0];
+			    tag = "A";
+			    break;
 
-		case EntityScript.Type.Blue:
-			baseColor = entityColors[1];
-			tag = "B";
-			break;
+		    case EntityScript.Type.Blue:
+                GetComponent<SpriteRenderer>().sprite = entitySprites[1];
+			    tag = "B";
+                break;
 
-		case EntityScript.Type.Yellow:
-			baseColor = entityColors[2];
-			tag = "C";
-			break;
+		    case EntityScript.Type.Yellow:
+                GetComponent<SpriteRenderer>().sprite = entitySprites[2];
+			    tag = "C";
+                break;
 
 		}
 
-		GetComponent<SpriteRenderer>().color = baseColor;
-
 	}
+
 	private void OnDestroy()
 	{
 		EntitySpawn.entitiesAlive.Remove(gameObject);
 
-		switch (COULOUR)
+        switch (color)
 		{
-		case EntityScript.Type.Red:
-			Mngr.instance.reds--;
-			break;
+		    case EntityScript.Type.Red:
+			    Mngr.instance.reds--;
+                break;
 
-		case EntityScript.Type.Blue:
-			Mngr.instance.blues--;
-			break;
+		    case EntityScript.Type.Blue:
+			    Mngr.instance.blues--;
+                break;
 
-		case EntityScript.Type.Yellow:
-			Mngr.instance.yellows--;
-			break;
+		    case EntityScript.Type.Yellow:
+			    Mngr.instance.yellows--;
+                break;
 
 		}
-	}
+
+    }
+
+    public void SpawnDeathParticles()
+    {
+        GameObject deathParticuleSystem = null;
+
+        switch (color)
+        {
+            case EntityScript.Type.Red:
+                deathParticuleSystem = Instantiate(deathParticuleSystems[0], transform.position, Quaternion.identity);
+                break;
+
+            case EntityScript.Type.Blue:
+                deathParticuleSystem = Instantiate(deathParticuleSystems[1], transform.position, Quaternion.identity);
+                break;
+
+            case EntityScript.Type.Yellow:
+                deathParticuleSystem = Instantiate(deathParticuleSystems[2], transform.position, Quaternion.identity);
+                break;
+
+        }
+
+        Mngr.instance.StartCoroutine(Mngr.instance.Destroyer(deathParticuleSystem, 1));
+	
+    }
 
 
 	// OLD

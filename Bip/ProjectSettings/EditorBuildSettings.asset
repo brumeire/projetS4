@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Proto1.unity
-  - enabled: 0
-    path: Assets/Scenes/Mobile.unity
   - enabled: 1
-    path: Assets/Scenes/LD Logan.unity
+    path: Assets/Resources/Scenes/LD Logan.unity
+    guid: 25e25e6b8ced2024d8625b00910fff77

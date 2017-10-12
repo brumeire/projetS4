@@ -7,18 +7,17 @@ public class Palier
 {
 	public int IterationsBeforeNextPalier = 1;
 
+    public bool loopPalier = false;
+
     public List<Iteration> iterations = new List<Iteration>();
 }
 
 
 
-
-[System.Serializable]
-public class EntityToCreate
+public enum MovementTypes
 {
-    public bool typeChosenToEquilibrate = false;
-    public EntityScript.Type type;
-
-    public float additionalSpeed = 0;
-
+    Rotation,
+    Linéaire
 }
+
+

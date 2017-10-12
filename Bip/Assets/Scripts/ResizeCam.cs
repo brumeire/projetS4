@@ -26,31 +26,30 @@ public class ResizeCam : MonoBehaviour {
 
         CamTopRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight,10));
 
-        Top = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight, 10));
-        Bot = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, 0, 10));
-        Left = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight / 2, 10));
-        Right = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight / 2, 10));
+        /*Top = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight, 10));
+         Bot = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, 0, 10));
+         Left = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight / 2, 10));
+         Right = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight / 2, 10));
 
-        LeftWall.transform.localScale = new Vector3(1, CamTopRight.y*2, 1);
-        LeftWall.transform.position = new Vector3(Left.x - 0.5f, Left.y, Left.z);
-        Instantiate(LeftWall);
+         LeftWall.transform.localScale = new Vector3(1, CamTopRight.y*2, 1);
+         LeftWall.transform.position = new Vector3(Left.x - 0.5f, Left.y, Left.z);
+         Instantiate(LeftWall);
 
-        RightWall.transform.localScale = new Vector3(1, CamTopRight.y * 2, 1);
-        RightWall.transform.position = new Vector3(Right.x + 0.5f, Right.y, Right.z);
-        Instantiate(RightWall);
+         RightWall.transform.localScale = new Vector3(1, CamTopRight.y * 2, 1);
+         RightWall.transform.position = new Vector3(Right.x + 0.5f, Right.y, Right.z);
+         Instantiate(RightWall);
 
-        TopWall.transform.localScale = new Vector3(CamTopRight.x * 2, 1, 1);
-        TopWall.transform.position = new Vector3 (Top.x, Top.y + 0.5f, Top.z);
-        Instantiate(TopWall);
+         TopWall.transform.localScale = new Vector3(CamTopRight.x * 2, 1, 1);
+         TopWall.transform.position = new Vector3 (Top.x, Top.y + 0.5f, Top.z);
+         Instantiate(TopWall);
 
-        BotWall.transform.localScale = new Vector3(CamTopRight.x * 2, CamTopRight.y / 2.5f, 1);
-        BotWall.transform.position = Bot;
-        Instantiate(BotWall);
+         BotWall.transform.localScale = new Vector3(CamTopRight.x * 2, CamTopRight.y / 2.5f, 1);
+         BotWall.transform.position = Bot;
+         Instantiate(BotWall);*/
 
-
-        BG.transform.localScale = new Vector3(CamTopRight.x * 2, CamTopRight.y * 2, 1);
-        BG.transform.position = new Vector3(0,0,20);
         background = Instantiate(BG);
+        background.transform.localScale = new Vector3(CamTopRight.y * 2, CamTopRight.y * 2, 1);
+        background.transform.position = new Vector3(0,0,20);
 
 
 

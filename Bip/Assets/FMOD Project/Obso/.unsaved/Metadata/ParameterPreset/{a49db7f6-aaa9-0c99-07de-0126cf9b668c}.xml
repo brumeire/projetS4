@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{a49db7f6-aaa9-0c99-07de-0126cf9b668c}">
+        <property name="name">
+            <value>VolumeGreen</value>
+        </property>
+        <relationship name="folder">
+            <destination>{c952ce08-65f2-4e2d-b961-2bf26739c82c}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{e4997156-2223-4f9e-b07d-c29c3d10a52d}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{e4997156-2223-4f9e-b07d-c29c3d10a52d}">
+        <property name="isExposedRecursively">
+            <value>false</value>
+        </property>
+    </object>
+</objects>

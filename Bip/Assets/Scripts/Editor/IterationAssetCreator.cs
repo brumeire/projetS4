@@ -4,20 +4,20 @@ using System.Collections.Generic;
 
 public class IterationAssetCreator
 {
-    [MenuItem("Assets/Create/New Iteration Object")]
+    [MenuItem("Assets/Create/New Pattern Object")]
     public static void CreateAsset()
     {
-        Iteration newIteration = ScriptableObject.CreateInstance<Iteration>();
+        Pattern newPattern = ScriptableObject.CreateInstance<Pattern>();
 
-        newIteration.timeBeforeNextIteration = 10;
+        //newIteration.timeBeforeNextIteration = 10;
 
-        newIteration.skipToNextPalier = false;
+        //newIteration.skipToNextPalier = false;
 
 
-        AssetDatabase.CreateAsset(newIteration, AssetDatabase.GetAssetPath(Selection.activeObject) + "/New Iteration.asset");
+        AssetDatabase.CreateAsset(newPattern, AssetDatabase.GetAssetPath(Selection.activeObject) + "/New Pattern.asset");
         AssetDatabase.SaveAssets();
 
-        Selection.activeObject = newIteration;
+        Selection.activeObject = newPattern;
     }
 
 

@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class EntitiesMove : MonoBehaviour {
 
-	public enum Type
-	{
-		rotation,
-		barre,
-	}
-
-	public Type MovementType;
+	public MovementTypes MovementType;
 	public float rayonInTime;
 	public float angleRad;
 	public float angleDegC;
@@ -19,8 +13,20 @@ public class EntitiesMove : MonoBehaviour {
 	public bool move = true;
 	bool placement;
 
+
+    CircleScript circleHolder;
+
 	void Start () {
 		placement = true;
+        
+
+        switch (MovementType)
+        {
+            case MovementTypes.Rotation:
+                circleHolder = transform.parent.GetComponent<CircleScript>();
+                break;
+        }
+
 	}
 
 	
@@ -31,53 +37,53 @@ public class EntitiesMove : MonoBehaviour {
 	}
 
 
-	public void ChangeType (Type newType)
+	public void ChangeType (MovementTypes newType)
 	{
 		MovementType = newType;
 
 
 		switch (MovementType) {
 
-		case Type.rotation:
+		case MovementTypes.Rotation:
 
 			if (move) {
-				rayonInTime -= Time.deltaTime * CircleMng.instance.breathSpeed;
-				if (rayonInTime <= CircleMng.instance.rayonMin) {
+				rayonInTime -= Time.deltaTime * circleHolder.breathSpeed;
+				if (rayonInTime <= circleHolder.rayonMin) {
 					move = false;
 				}
 			}
 			if (!move) {
-				rayonInTime += Time.deltaTime * CircleMng.instance.breathSpeed;
-				if (rayonInTime >= CircleMng.instance.rayonMax) {
+				rayonInTime += Time.deltaTime * circleHolder.breathSpeed;
+				if (rayonInTime >= circleHolder.rayonMax) {
 					move = true;
 				}
 			}
 			if (placement) {
-				angleDegC = (360 / CircleMng.instance.entityNb) * GetComponent<EntityScript> ().positionInCircle;
-				rayonInTime = CircleMng.instance.rayonMax;
+				angleDegC = (360 / circleHolder.entityNb) * GetComponent<EntityScript> ().positionInCircle;
+				rayonInTime = circleHolder.rayonMax;
 				placement = false;
 			}
-			angleDegC += Time.deltaTime * CircleMng.instance.rotationSpeed;
+			angleDegC += Time.deltaTime * circleHolder.rotationSpeed;
 
 			angleRad = angleDegC * Mathf.Deg2Rad;
 			x = Mathf.Cos (angleRad) * rayonInTime;
 			y = Mathf.Sin (angleRad) * rayonInTime;
-			transform.position = CircleMng.instance.center + new Vector3 (x, y, 0);
+			transform.position = circleHolder.center + new Vector3 (x, y, 0);
 			break;
 
 
 
 
 
-		case Type.barre:
-			CircleMng.instance.angleDeg += Time.deltaTime * CircleMng.instance.rotationSpeed;
-			angleRad = CircleMng.instance.angleDeg * Mathf.Deg2Rad;
-			x = Mathf.Cos (angleRad) * CircleMng.instance.espacement * (GetComponent<EntityScript> ().positionInCircle-1);
-			y = Mathf.Sin (angleRad) * CircleMng.instance.espacement * (GetComponent<EntityScript> ().positionInCircle-1);
+		/*case MovementTypes.barre:
+			circleHolder.angleDeg += Time.deltaTime * circleHolder.rotationSpeed;
+			angleRad = circleHolder.angleDeg * Mathf.Deg2Rad;
+			x = Mathf.Cos (angleRad) * circleHolder.espacement * (GetComponent<EntityScript> ().positionInCircle-1);
+			y = Mathf.Sin (angleRad) * circleHolder.espacement * (GetComponent<EntityScript> ().positionInCircle-1);
 
-			transform.position = CircleMng.instance.center + new Vector3 (x, y, 0);
+			transform.position = circleHolder.center + new Vector3 (x, y, 0);
 
-			break;
+			break;*/
 		
 
 
